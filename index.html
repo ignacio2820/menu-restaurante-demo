@@ -39,11 +39,15 @@
 </head>
 <body class="bg-black text-white font-body">
     <div class="mx-auto min-h-screen max-w-md bg-gradient-to-b from-black via-neutral-950 to-black shadow-[0_0_100px_rgba(0,0,0,0.85)] safe-area">
+        <div id="schedule-banner" class="hidden px-5 py-2 bg-yellow-300/10 border-b border-yellow-400/25 text-yellow-100 text-xs">
+            Horario de atención: 12:00 a 16:00 y 19:00 a 23:30
+        </div>
         <header class="px-5 pt-7 pb-4 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-md z-30">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-[11px] uppercase tracking-[0.22em] text-yellow-200/75">Restaurante Elite</p>
-                    <h1 class="text-3xl font-display mt-1 text-yellow-100">Menú de Autor</h1>
+                    <h1 class="text-4xl font-display mt-1 text-yellow-100 leading-tight">Reserva Exclusiva</h1>
+                    <p class="text-xs text-yellow-100/85 mt-1 font-display">Gastronomía de Autor & Maridaje</p>
                 </div>
                 <button class="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
                     <i data-lucide="bell-ring" class="h-5 w-5 text-yellow-300"></i>
@@ -140,8 +144,9 @@
                     <p id="cart-total" class="text-yellow-300 font-semibold">$0</p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <div id="cart-icon" class="h-12 w-12 rounded-full bg-black/60 border border-yellow-400/50 flex items-center justify-center text-yellow-300">
+                    <div id="cart-icon" class="relative h-12 w-12 rounded-full bg-black/60 border border-yellow-400/50 flex items-center justify-center text-yellow-300">
                         <i data-lucide="shopping-bag" class="h-5 w-5"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-red-500 text-[10px] leading-5 text-white text-center font-semibold">0</span>
                     </div>
                     <button id="ia-button" class="bg-black border border-yellow-400 text-yellow-300 h-12 w-12 rounded-full flex items-center justify-center shadow-[0_10px_24px_rgba(212,175,55,0.35)]">
                     <i data-lucide="sparkles" class="h-5 w-5"></i>
@@ -199,16 +204,22 @@
         document.documentElement.style.scrollBehavior = "smooth";
 
         const currency = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+        const CART_STORAGE_KEY = "elite_menu_cart";
+        const OPENING_HOURS_TEXT = "12:00 a 16:00 y 19:00 a 23:30";
         const cart = [];
         const bellSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
-        bellSound.volume = 0.22;
-        let playedChatSound = false;
+        bellSound.volume = 0.18;
+        bellSound.preload = "auto";
+        let audioUnlocked = false;
         let chatClosed = false;
         let proactiveTimer;
         let parallaxTicking = false;
+        let isKitchenOpen = true;
 
+        const scheduleBanner = document.getElementById("schedule-banner");
         const cartSummary = document.getElementById("cart-summary");
         const cartTotal = document.getElementById("cart-total");
+        const cartCount = document.getElementById("cart-count");
         const cartIcon = document.getElementById("cart-icon");
         const checkoutBtn = document.getElementById("checkout-btn");
         const addButtons = document.querySelectorAll(".add-to-cart");
@@ -242,6 +253,72 @@
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             cartSummary.textContent = `${cart.length} plato${cart.length === 1 ? "" : "s"} seleccionado${cart.length === 1 ? "" : "s"}`;
             cartTotal.textContent = currency.format(total);
+            cartCount.textContent = String(cart.length);
+        };
+
+        const saveCart = () => {
+            localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+        };
+
+        const loadCart = () => {
+            const raw = localStorage.getItem(CART_STORAGE_KEY);
+            if (!raw) return;
+            try {
+                const parsed = JSON.parse(raw);
+                if (!Array.isArray(parsed)) return;
+                parsed.forEach((item) => {
+                    if (item?.name && Number.isFinite(item?.price)) {
+                        cart.push({ name: item.name, price: Number(item.price) });
+                    }
+                });
+            } catch {
+                localStorage.removeItem(CART_STORAGE_KEY);
+            }
+        };
+
+        const withinRange = (minutes, start, end) => minutes >= start && minutes <= end;
+
+        const checkKitchenStatus = () => {
+            const now = new Date();
+            const minutes = now.getHours() * 60 + now.getMinutes();
+            const lunchOpen = withinRange(minutes, 12 * 60, 16 * 60);
+            const dinnerOpen = withinRange(minutes, 19 * 60, 23 * 60 + 30);
+            isKitchenOpen = lunchOpen || dinnerOpen;
+
+            if (!isKitchenOpen) {
+                scheduleBanner.classList.remove("hidden");
+                scheduleBanner.textContent = `Horario de atención: ${OPENING_HOURS_TEXT}`;
+            }
+        };
+
+        const applyKitchenStatus = () => {
+            addButtons.forEach((button) => {
+                if (isKitchenOpen) {
+                    button.disabled = false;
+                    button.textContent = "Añadir al pedido";
+                    button.className = button.className
+                        .replace(" bg-gray-700 text-gray-300 cursor-not-allowed", "")
+                        .trim();
+                    return;
+                }
+
+                button.disabled = true;
+                button.textContent = "Cocina Cerrada actualmente";
+                if (!button.className.includes("bg-gray-700")) {
+                    button.className += " bg-gray-700 text-gray-300 cursor-not-allowed";
+                }
+            });
+        };
+
+        const unlockAudio = () => {
+            if (audioUnlocked) return;
+            bellSound.play()
+                .then(() => {
+                    bellSound.pause();
+                    bellSound.currentTime = 0;
+                    audioUnlocked = true;
+                })
+                .catch(() => {});
         };
 
         const animateFlyToCart = (button) => {
@@ -276,11 +353,13 @@
 
         addButtons.forEach((button) => {
             button.addEventListener("click", () => {
+                if (!isKitchenOpen) return;
                 const name = button.dataset.name;
                 const price = Number(button.dataset.price);
                 const isMainDish = button.dataset.category === "plato-fuerte";
                 cart.push({ name, price });
                 updateCartUI();
+                saveCart();
                 animateFlyToCart(button);
                 scheduleProactiveTooltip(isMainDish);
             });
@@ -299,9 +378,13 @@
         const openModal = () => {
             iaModal.classList.remove("hidden");
             chatClosed = false;
-            if (!playedChatSound) {
+            if (audioUnlocked) {
+                bellSound.currentTime = 0;
                 bellSound.play().catch(() => {});
-                playedChatSound = true;
+                setTimeout(() => {
+                    bellSound.pause();
+                    bellSound.currentTime = 0;
+                }, 500);
             }
             requestAnimationFrame(() => {
                 iaOverlay.classList.remove("opacity-0");
@@ -325,6 +408,7 @@
         document.addEventListener("keydown", (event) => {
             if (event.key === "Escape") closeModal();
         });
+        document.addEventListener("pointerdown", unlockAudio, { once: true });
 
         chatForm.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -356,6 +440,11 @@
             parallaxTicking = true;
             requestAnimationFrame(applyParallax);
         }, { passive: true });
+
+        loadCart();
+        checkKitchenStatus();
+        applyKitchenStatus();
+        updateCartUI();
         applyParallax();
 
         checkoutBtn.addEventListener("click", () => {
