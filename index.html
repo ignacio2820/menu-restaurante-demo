@@ -16,6 +16,25 @@
         .font-display { font-family: "Playfair Display", serif; }
         .font-body { font-family: "Inter", sans-serif; }
         .gold-line { border: 1px solid rgba(212, 175, 55, 0.38); box-shadow: inset 0 0 0 1px rgba(255, 234, 170, 0.06); }
+        .parallax-image {
+            transform: translateY(var(--py, 0px)) scale(1);
+            transition: transform 450ms ease, filter 450ms ease;
+            will-change: transform;
+        }
+        .parallax-image:hover {
+            transform: translateY(var(--py, 0px)) scale(1.05);
+            filter: brightness(1.1);
+        }
+        .fly-dot {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            border-radius: 9999px;
+            background: radial-gradient(circle, #ffe8a3 0%, #d4af37 70%);
+            box-shadow: 0 0 16px rgba(212, 175, 55, 0.75);
+            z-index: 60;
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="bg-black text-white font-body">
@@ -44,7 +63,7 @@
             <section id="entradas" class="space-y-3">
                 <h2 class="text-2xl font-display text-yellow-100">Entradas</h2>
                 <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
-                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Entrada gourmet" class="h-40 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Entrada gourmet" class="parallax-image h-40 w-full object-cover">
                     <div class="p-4">
                         <div class="flex justify-between items-start gap-3">
                             <h3 class="font-display text-xl text-yellow-100">Carpaccio Trufado</h3>
@@ -59,26 +78,26 @@
             <section id="platos-fuertes" class="space-y-3">
                 <h2 class="text-2xl font-display text-yellow-100">Platos Fuertes</h2>
                 <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
-                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80" alt="Gourmet steak" class="h-44 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80" alt="Gourmet steak" class="parallax-image h-44 w-full object-cover">
                     <div class="p-4">
                         <div class="flex justify-between items-start gap-3">
                             <h3 class="font-display text-2xl text-yellow-100">Ojo de Bife Premium</h3>
                             <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$18.500</span>
                         </div>
                         <p class="text-gray-400 text-sm mt-2">400g de corte seleccionado con manteca de hierbas y papas rústicas.</p>
-                        <button data-name="Ojo de Bife Premium" data-price="18500" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
+                        <button data-name="Ojo de Bife Premium" data-price="18500" data-category="plato-fuerte" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
                     </div>
                 </article>
 
                 <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
-                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80" alt="Fine dining pasta" class="h-44 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80" alt="Fine dining pasta" class="parallax-image h-44 w-full object-cover">
                     <div class="p-4">
                         <div class="flex justify-between items-start gap-3">
                             <h3 class="font-display text-2xl text-yellow-100">Tagliatelle de la Casa</h3>
                             <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$12.400</span>
                         </div>
                         <p class="text-gray-400 text-sm mt-2">Pasta artesanal con crema de hongos y parmesano añejo.</p>
-                        <button data-name="Tagliatelle de la Casa" data-price="12400" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
+                        <button data-name="Tagliatelle de la Casa" data-price="12400" data-category="plato-fuerte" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
                     </div>
                 </article>
             </section>
@@ -100,7 +119,7 @@
             <section id="postres" class="space-y-3 pb-40">
                 <h2 class="text-2xl font-display text-yellow-100">Postres</h2>
                 <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
-                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80" alt="Luxury dessert" class="h-40 w-full object-cover">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80" alt="Luxury dessert" class="parallax-image h-40 w-full object-cover">
                     <div class="p-4">
                         <div class="flex justify-between items-start gap-3">
                             <h3 class="font-display text-xl text-yellow-100">Volcán de Chocolate</h3>
@@ -120,18 +139,27 @@
                     <p id="cart-summary" class="text-sm text-gray-200">0 platos seleccionados</p>
                     <p id="cart-total" class="text-yellow-300 font-semibold">$0</p>
                 </div>
-                <button id="ia-button" class="bg-black border border-yellow-400 text-yellow-300 h-12 w-12 rounded-full flex items-center justify-center shadow-[0_10px_24px_rgba(212,175,55,0.35)]">
+                <div class="flex items-center gap-2">
+                    <div id="cart-icon" class="h-12 w-12 rounded-full bg-black/60 border border-yellow-400/50 flex items-center justify-center text-yellow-300">
+                        <i data-lucide="shopping-bag" class="h-5 w-5"></i>
+                    </div>
+                    <button id="ia-button" class="bg-black border border-yellow-400 text-yellow-300 h-12 w-12 rounded-full flex items-center justify-center shadow-[0_10px_24px_rgba(212,175,55,0.35)]">
                     <i data-lucide="sparkles" class="h-5 w-5"></i>
-                </button>
+                    </button>
+                </div>
             </div>
             <button id="checkout-btn" class="mt-3 w-full py-2.5 rounded-xl gold-gradient text-black font-semibold text-sm">Finalizar Pedido</button>
+        </div>
+
+        <div id="ia-proactive-tooltip" class="hidden fixed bottom-28 right-5 w-60 rounded-2xl border border-yellow-300/50 bg-black/85 text-yellow-100 text-xs p-3 shadow-2xl z-50">
+            Excelente elección. ¿Te gustaría que te recomiende un vino para este plato?
         </div>
 
         <div id="ia-modal" class="hidden fixed inset-0 z-50">
             <div id="ia-overlay" class="absolute inset-0 bg-black/55 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
             <div id="ia-panel" class="absolute bottom-0 left-0 right-0 mx-auto w-full max-w-md px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] transition-all duration-300 ease-out translate-y-10 opacity-0">
-                <div class="rounded-[28px] gold-line bg-white/10 backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] overflow-hidden">
-                    <div class="px-4 pt-4 pb-3 border-b border-white/10">
+                <div class="rounded-[28px] gold-line bg-white/12 backdrop-blur-2xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] overflow-hidden">
+                    <div class="px-4 pt-4 pb-3 border-b border-white/10 bg-gradient-to-r from-yellow-500/10 to-transparent">
                         <div class="flex items-center justify-between gap-3">
                             <div>
                                 <h3 class="text-lg font-display text-yellow-300 tracking-wide">Elite Sommelier</h3>
@@ -146,7 +174,7 @@
                         </div>
                     </div>
 
-                    <div id="chat-box" class="h-72 overflow-y-auto px-4 py-4 space-y-3 bg-gradient-to-b from-black/20 to-black/35">
+                    <div id="chat-box" class="h-72 overflow-y-auto px-4 py-4 space-y-3 bg-gradient-to-b from-black/10 via-black/20 to-black/40">
                         <div class="max-w-[88%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100">
                             Bienvenido a Elite. Soy su asistente personal. ¿Busca un maridaje especial o tiene alguna preferencia dietética?
                         </div>
@@ -172,17 +200,26 @@
 
         const currency = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
         const cart = [];
+        const bellSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
+        bellSound.volume = 0.22;
+        let playedChatSound = false;
+        let chatClosed = false;
+        let proactiveTimer;
+        let parallaxTicking = false;
 
         const cartSummary = document.getElementById("cart-summary");
         const cartTotal = document.getElementById("cart-total");
+        const cartIcon = document.getElementById("cart-icon");
         const checkoutBtn = document.getElementById("checkout-btn");
         const addButtons = document.querySelectorAll(".add-to-cart");
+        const parallaxImages = document.querySelectorAll(".parallax-image");
 
         const iaButton = document.getElementById("ia-button");
         const iaModal = document.getElementById("ia-modal");
         const iaPanel = document.getElementById("ia-panel");
         const closeIaModal = document.getElementById("close-ia-modal");
         const iaOverlay = document.getElementById("ia-overlay");
+        const proactiveTooltip = document.getElementById("ia-proactive-tooltip");
         const chatForm = document.getElementById("chat-form");
         const chatInput = document.getElementById("chat-input");
         const chatBox = document.getElementById("chat-box");
@@ -207,12 +244,45 @@
             cartTotal.textContent = currency.format(total);
         };
 
+        const animateFlyToCart = (button) => {
+            const start = button.getBoundingClientRect();
+            const end = cartIcon.getBoundingClientRect();
+            const dot = document.createElement("span");
+            dot.className = "fly-dot";
+            dot.style.left = `${start.left + start.width / 2}px`;
+            dot.style.top = `${start.top + start.height / 2}px`;
+            document.body.appendChild(dot);
+
+            dot.animate(
+                [
+                    { transform: "translate(0, 0) scale(1)", opacity: 1 },
+                    { transform: `translate(${end.left - start.left}px, ${end.top - start.top}px) scale(0.4)`, opacity: 0.6 }
+                ],
+                { duration: 650, easing: "cubic-bezier(.2,.8,.2,1)" }
+            ).onfinish = () => dot.remove();
+        };
+
+        const scheduleProactiveTooltip = (isMainDish) => {
+            clearTimeout(proactiveTimer);
+            proactiveTooltip.classList.add("hidden");
+            if (!isMainDish || chatClosed || iaModal.classList.contains("hidden")) return;
+            proactiveTimer = setTimeout(() => {
+                if (!chatClosed && !iaModal.classList.contains("hidden")) {
+                    proactiveTooltip.classList.remove("hidden");
+                    setTimeout(() => proactiveTooltip.classList.add("hidden"), 4300);
+                }
+            }, 3000);
+        };
+
         addButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 const name = button.dataset.name;
                 const price = Number(button.dataset.price);
+                const isMainDish = button.dataset.category === "plato-fuerte";
                 cart.push({ name, price });
                 updateCartUI();
+                animateFlyToCart(button);
+                scheduleProactiveTooltip(isMainDish);
             });
         });
 
@@ -228,6 +298,11 @@
 
         const openModal = () => {
             iaModal.classList.remove("hidden");
+            chatClosed = false;
+            if (!playedChatSound) {
+                bellSound.play().catch(() => {});
+                playedChatSound = true;
+            }
             requestAnimationFrame(() => {
                 iaOverlay.classList.remove("opacity-0");
                 iaPanel.classList.remove("translate-y-10", "opacity-0");
@@ -236,6 +311,8 @@
         };
 
         const closeModal = () => {
+            chatClosed = true;
+            proactiveTooltip.classList.add("hidden");
             iaOverlay.classList.add("opacity-0");
             iaPanel.classList.add("translate-y-10", "opacity-0");
             setTimeout(() => iaModal.classList.add("hidden"), 280);
@@ -264,13 +341,32 @@
             setTimeout(() => addMessage(reply, "assistant"), 520);
         });
 
+        const applyParallax = () => {
+            const viewportCenter = window.innerHeight / 2;
+            parallaxImages.forEach((image) => {
+                const rect = image.getBoundingClientRect();
+                const offset = (rect.top - viewportCenter) * -0.02;
+                image.style.setProperty("--py", `${Math.max(-8, Math.min(8, offset))}px`);
+            });
+            parallaxTicking = false;
+        };
+
+        window.addEventListener("scroll", () => {
+            if (parallaxTicking) return;
+            parallaxTicking = true;
+            requestAnimationFrame(applyParallax);
+        }, { passive: true });
+        applyParallax();
+
         checkoutBtn.addEventListener("click", () => {
             if (!cart.length) {
                 alert("Aún no hay platos en el carrito.");
                 return;
             }
-            const items = cart.map((item) => item.name).join(", ");
-            const message = `Hola! Me gustaría reservar/pedir: ${items}`;
+            const mesa = prompt("Ingrese número de mesa:", "");
+            const listaPlatos = cart.map((item) => `• ${item.name} - ${currency.format(item.price)}`).join("\n");
+            const total = currency.format(cart.reduce((sum, item) => sum + item.price, 0));
+            const message = `🔹 NUEVO PEDIDO - ELITE MENU 🔹\n------------------------------\n${listaPlatos}\n------------------------------\n💰 TOTAL: ${total}\n📍 Mesa: ${mesa && mesa.trim() ? mesa.trim() : "[Ingresar Mesa]"}`;
             const whatsappUrl = `https://wa.me/5490000000000?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, "_blank", "noopener,noreferrer");
         });
