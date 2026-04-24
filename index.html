@@ -20,122 +20,146 @@
 </head>
 <body class="bg-black text-white font-body">
     <div class="mx-auto min-h-screen max-w-md bg-gradient-to-b from-black via-neutral-950 to-black shadow-[0_0_100px_rgba(0,0,0,0.85)] safe-area">
-    <header class="px-5 pt-7 pb-5 border-b border-white/10">
-        <div class="flex items-center justify-between">
-            <div>
-                <p class="text-[11px] uppercase tracking-[0.22em] text-yellow-200/75">Restaurante Elite</p>
-                <h1 class="text-3xl font-display mt-1 text-yellow-100">Menú de Autor</h1>
-            </div>
-            <button class="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
-                <i data-lucide="bell-ring" class="h-5 w-5 text-yellow-300"></i>
-            </button>
-        </div>
-        <p class="text-gray-400 text-sm mt-4">Una experiencia móvil premium, pensada para cada detalle.</p>
-    </header>
-
-    <main class="px-5 py-5">
-        <section class="glass-card gold-line rounded-3xl p-4">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-2xl font-display text-yellow-100">Nuestras Especialidades</h2>
-                <span class="text-xs tracking-widest uppercase text-yellow-300">Top Picks</span>
-            </div>
-            <div class="rounded-2xl overflow-hidden gold-line bg-gradient-to-b from-white/[0.03] to-white/[0.01] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_35px_rgba(0,0,0,0.45)] hover:border-yellow-300/60">
-                <div class="h-40 bg-gradient-to-br from-neutral-700 to-neutral-900 flex items-center justify-center text-gray-300">
-                    <i data-lucide="utensils-crossed" class="h-12 w-12"></i>
+        <header class="px-5 pt-7 pb-4 border-b border-white/10 sticky top-0 bg-black/90 backdrop-blur-md z-30">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[11px] uppercase tracking-[0.22em] text-yellow-200/75">Restaurante Elite</p>
+                    <h1 class="text-3xl font-display mt-1 text-yellow-100">Menú de Autor</h1>
                 </div>
-                <div class="p-4">
-                    <div class="flex justify-between items-start gap-3">
-                        <h3 class="font-display text-2xl leading-tight text-yellow-100">Ojo de Bife Premium</h3>
-                        <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$18.500</span>
-                    </div>
-                    <p class="text-gray-400 text-sm mt-2">400g de corte seleccionado con manteca de hierbas y papas rústicas.</p>
-                    <div class="mt-4 flex gap-2 text-xs text-gray-300">
-                        <span class="bg-white/5 border border-white/10 px-2 py-1 rounded-full">Chef Recomendado</span>
-                        <span class="bg-white/5 border border-white/10 px-2 py-1 rounded-full">Listo en 18 min</span>
-                    </div>
-                    <button class="mt-4 w-full py-3 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
-                </div>
+                <button class="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+                    <i data-lucide="bell-ring" class="h-5 w-5 text-yellow-300"></i>
+                </button>
             </div>
-        </section>
-    </main>
+            <div class="mt-4 overflow-x-auto no-scrollbar">
+                <nav class="flex gap-2 text-xs whitespace-nowrap">
+                    <a href="#entradas" class="px-3 py-2 rounded-full border border-yellow-400/40 bg-yellow-300/10 text-yellow-200">Entradas</a>
+                    <a href="#platos-fuertes" class="px-3 py-2 rounded-full border border-white/15 bg-white/5 text-gray-200">Platos Fuertes</a>
+                    <a href="#vinos" class="px-3 py-2 rounded-full border border-white/15 bg-white/5 text-gray-200">Vinos</a>
+                    <a href="#postres" class="px-3 py-2 rounded-full border border-white/15 bg-white/5 text-gray-200">Postres</a>
+                </nav>
+            </div>
+        </header>
 
-    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-2rem)] max-w-md bg-neutral-900/90 border border-white/10 rounded-3xl px-4 py-3 backdrop-blur-md">
-        <div class="flex justify-between items-center text-xs text-gray-400">
-            <button class="flex flex-col items-center gap-1 text-yellow-300">
-                <i data-lucide="house" class="h-4 w-4"></i>
-                Inicio
-            </button>
-            <button class="flex flex-col items-center gap-1">
-                <i data-lucide="bookmark" class="h-4 w-4"></i>
-                Favoritos
-            </button>
-            <button id="ia-button" class="relative -mt-8 bg-black border border-yellow-400 text-yellow-300 h-14 w-14 rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(212,175,55,0.4)]">
-                <i data-lucide="sparkles" class="h-6 w-6"></i>
-            </button>
-            <button class="flex flex-col items-center gap-1">
-                <i data-lucide="shopping-bag" class="h-4 w-4"></i>
-                Pedido
-            </button>
-            <button class="flex flex-col items-center gap-1">
-                <i data-lucide="user-round" class="h-4 w-4"></i>
-                Perfil
-            </button>
-        </div>
-    </nav>
-
-    <div id="ia-tooltip" class="fixed bottom-28 right-6 w-52 bg-white text-black p-2.5 rounded-xl text-[10px] shadow-2xl font-bold leading-tight">
-        ¿No sabes qué elegir? <br> Pregúntale a nuestra IA Sommelier
-    </div>
-
-    <div id="ia-modal" class="hidden fixed inset-0 z-50">
-        <div id="ia-overlay" class="absolute inset-0 bg-black/55 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
-        <div id="ia-panel" class="absolute bottom-0 left-0 right-0 mx-auto w-full max-w-md px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] transition-all duration-300 ease-out translate-y-10 opacity-0">
-            <div class="rounded-[28px] gold-line bg-white/10 backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] overflow-hidden">
-                <div class="px-4 pt-4 pb-3 border-b border-white/10">
-                    <div class="flex items-center justify-between gap-3">
-                        <div>
-                            <h3 class="text-lg font-display text-yellow-300 tracking-wide">Elite Sommelier</h3>
-                            <div class="mt-1 flex items-center gap-2 text-xs text-emerald-300">
-                                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                                En línea
-                            </div>
+        <main class="px-5 py-5 space-y-8">
+            <section id="entradas" class="space-y-3">
+                <h2 class="text-2xl font-display text-yellow-100">Entradas</h2>
+                <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
+                    <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80" alt="Entrada gourmet" class="h-40 w-full object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start gap-3">
+                            <h3 class="font-display text-xl text-yellow-100">Carpaccio Trufado</h3>
+                            <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$7.900</span>
                         </div>
-                        <button id="close-ia-modal" class="h-9 w-9 rounded-xl border border-white/15 bg-black/20 flex items-center justify-center text-gray-300">
-                            <i data-lucide="x" class="h-4 w-4"></i>
-                        </button>
+                        <p class="text-gray-400 text-sm mt-2">Láminas de res premium, rúcula y aceite de trufa blanca.</p>
+                        <button data-name="Carpaccio Trufado" data-price="7900" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
                     </div>
-                </div>
+                </article>
+            </section>
 
-                <div id="chat-box" class="h-72 overflow-y-auto px-4 py-4 space-y-3 bg-gradient-to-b from-black/20 to-black/35">
-                    <div class="max-w-[85%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100">
-                        Hola, soy tu sommelier virtual. Escribe tu plato ideal y te recomiendo el mejor vino.
+            <section id="platos-fuertes" class="space-y-3">
+                <h2 class="text-2xl font-display text-yellow-100">Platos Fuertes</h2>
+                <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
+                    <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=1200&q=80" alt="Gourmet steak" class="h-44 w-full object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start gap-3">
+                            <h3 class="font-display text-2xl text-yellow-100">Ojo de Bife Premium</h3>
+                            <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$18.500</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">400g de corte seleccionado con manteca de hierbas y papas rústicas.</p>
+                        <button data-name="Ojo de Bife Premium" data-price="18500" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
                     </div>
-                </div>
+                </article>
 
-                <form id="chat-form" class="p-3 border-t border-white/10">
-                    <div class="flex items-center gap-2 rounded-2xl border border-white/15 bg-black/35 px-2 py-2">
-                        <input
-                            id="chat-input"
-                            type="text"
-                            placeholder="Pregunta por maridajes..."
-                            class="flex-1 bg-transparent px-2 text-sm text-white placeholder:text-gray-400 focus:outline-none"
-                        />
-                        <button type="submit" class="h-10 w-10 rounded-xl gold-gradient text-black flex items-center justify-center">
-                            <i data-lucide="send-horizontal" class="h-4 w-4"></i>
-                        </button>
+                <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
+                    <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80" alt="Fine dining pasta" class="h-44 w-full object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start gap-3">
+                            <h3 class="font-display text-2xl text-yellow-100">Tagliatelle de la Casa</h3>
+                            <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$12.400</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">Pasta artesanal con crema de hongos y parmesano añejo.</p>
+                        <button data-name="Tagliatelle de la Casa" data-price="12400" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
                     </div>
-                </form>
-                <div class="px-3 pb-3">
-                    <a
-                        id="whatsapp-cta"
-                        href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20una%20recomendaci%C3%B3n%20de%20maridaje%20del%20men%C3%BA."
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 text-emerald-300 py-2.5 text-sm font-medium transition-colors hover:bg-emerald-500/20"
-                    >
-                        <i data-lucide="message-circle" class="h-4 w-4"></i>
-                        Pedir recomendación por WhatsApp
-                    </a>
+                </article>
+            </section>
+
+            <section id="vinos" class="space-y-3">
+                <h2 class="text-2xl font-display text-yellow-100">Vinos</h2>
+                <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03] p-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-display text-xl text-yellow-100">Cabernet de la Casa</h3>
+                            <p class="text-sm text-gray-400 mt-1">Notas de cassis, roble suave y final elegante.</p>
+                        </div>
+                        <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$9.200</span>
+                    </div>
+                    <button data-name="Cabernet de la Casa" data-price="9200" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
+                </article>
+            </section>
+
+            <section id="postres" class="space-y-3 pb-40">
+                <h2 class="text-2xl font-display text-yellow-100">Postres</h2>
+                <article class="dish-card reveal rounded-2xl overflow-hidden gold-line bg-white/[0.03]">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1200&q=80" alt="Luxury dessert" class="h-40 w-full object-cover">
+                    <div class="p-4">
+                        <div class="flex justify-between items-start gap-3">
+                            <h3 class="font-display text-xl text-yellow-100">Volcán de Chocolate</h3>
+                            <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$6.800</span>
+                        </div>
+                        <p class="text-gray-400 text-sm mt-2">Con frutos del bosque y helado de vainilla de Madagascar.</p>
+                        <button data-name="Volcán de Chocolate" data-price="6800" class="add-to-cart mt-4 w-full py-2.5 bg-white text-black text-xs uppercase tracking-widest rounded-xl font-semibold">Añadir al pedido</button>
+                    </div>
+                </article>
+            </section>
+        </main>
+
+        <div class="fixed bottom-4 left-1/2 -translate-x-1/2 w-[calc(100%-1.5rem)] max-w-md bg-neutral-900/95 border border-yellow-400/25 rounded-3xl p-3 backdrop-blur-md z-40">
+            <div class="flex items-center justify-between">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.2em] text-yellow-200/70">Carrito</p>
+                    <p id="cart-summary" class="text-sm text-gray-200">0 platos seleccionados</p>
+                    <p id="cart-total" class="text-yellow-300 font-semibold">$0</p>
+                </div>
+                <button id="ia-button" class="bg-black border border-yellow-400 text-yellow-300 h-12 w-12 rounded-full flex items-center justify-center shadow-[0_10px_24px_rgba(212,175,55,0.35)]">
+                    <i data-lucide="sparkles" class="h-5 w-5"></i>
+                </button>
+            </div>
+            <button id="checkout-btn" class="mt-3 w-full py-2.5 rounded-xl gold-gradient text-black font-semibold text-sm">Finalizar Pedido</button>
+        </div>
+
+        <div id="ia-modal" class="hidden fixed inset-0 z-50">
+            <div id="ia-overlay" class="absolute inset-0 bg-black/55 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+            <div id="ia-panel" class="absolute bottom-0 left-0 right-0 mx-auto w-full max-w-md px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] transition-all duration-300 ease-out translate-y-10 opacity-0">
+                <div class="rounded-[28px] gold-line bg-white/10 backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] overflow-hidden">
+                    <div class="px-4 pt-4 pb-3 border-b border-white/10">
+                        <div class="flex items-center justify-between gap-3">
+                            <div>
+                                <h3 class="text-lg font-display text-yellow-300 tracking-wide">Elite Sommelier</h3>
+                                <div class="mt-1 flex items-center gap-2 text-xs text-emerald-300">
+                                    <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    En línea
+                                </div>
+                            </div>
+                            <button id="close-ia-modal" class="h-9 w-9 rounded-xl border border-white/15 bg-black/20 flex items-center justify-center text-gray-300">
+                                <i data-lucide="x" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="chat-box" class="h-72 overflow-y-auto px-4 py-4 space-y-3 bg-gradient-to-b from-black/20 to-black/35">
+                        <div class="max-w-[88%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100">
+                            Bienvenido a Elite. Soy su asistente personal. ¿Busca un maridaje especial o tiene alguna preferencia dietética?
+                        </div>
+                    </div>
+
+                    <form id="chat-form" class="p-3 border-t border-white/10">
+                        <div class="flex items-center gap-2 rounded-2xl border border-white/15 bg-black/35 px-2 py-2">
+                            <input id="chat-input" type="text" placeholder="Escriba su consulta..." class="flex-1 bg-transparent px-2 text-sm text-white placeholder:text-gray-400 focus:outline-none" />
+                            <button type="submit" class="h-10 w-10 rounded-xl gold-gradient text-black flex items-center justify-center">
+                                <i data-lucide="send-horizontal" class="h-4 w-4"></i>
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -144,22 +168,59 @@
     <script>
         lucide.createIcons();
 
+        document.documentElement.style.scrollBehavior = "smooth";
+
+        const currency = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
+        const cart = [];
+
+        const cartSummary = document.getElementById("cart-summary");
+        const cartTotal = document.getElementById("cart-total");
+        const checkoutBtn = document.getElementById("checkout-btn");
+        const addButtons = document.querySelectorAll(".add-to-cart");
+
         const iaButton = document.getElementById("ia-button");
         const iaModal = document.getElementById("ia-modal");
         const iaPanel = document.getElementById("ia-panel");
         const closeIaModal = document.getElementById("close-ia-modal");
         const iaOverlay = document.getElementById("ia-overlay");
-        const iaTooltip = document.getElementById("ia-tooltip");
         const chatForm = document.getElementById("chat-form");
         const chatInput = document.getElementById("chat-input");
         const chatBox = document.getElementById("chat-box");
 
+        const revealItems = document.querySelectorAll(".reveal");
+        revealItems.forEach((item) => {
+            item.classList.add("opacity-0", "translate-y-6", "transition-all", "duration-700");
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.remove("opacity-0", "translate-y-6");
+                observer.unobserve(entry.target);
+            });
+        }, { threshold: 0.15 });
+        revealItems.forEach((item) => observer.observe(item));
+
+        const updateCartUI = () => {
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+            cartSummary.textContent = `${cart.length} plato${cart.length === 1 ? "" : "s"} seleccionado${cart.length === 1 ? "" : "s"}`;
+            cartTotal.textContent = currency.format(total);
+        };
+
+        addButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                const name = button.dataset.name;
+                const price = Number(button.dataset.price);
+                cart.push({ name, price });
+                updateCartUI();
+            });
+        });
+
         const addMessage = (text, role) => {
             const message = document.createElement("div");
-            message.className =
-                role === "user"
-                    ? "max-w-[85%] ml-auto bg-yellow-300 text-black rounded-2xl rounded-br-md px-3 py-2 text-sm"
-                    : "max-w-[85%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100";
+            message.className = role === "user"
+                ? "max-w-[88%] ml-auto bg-yellow-300 text-black rounded-2xl rounded-br-md px-3 py-2 text-sm"
+                : "max-w-[88%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100";
             message.textContent = text;
             chatBox.appendChild(message);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -167,7 +228,6 @@
 
         const openModal = () => {
             iaModal.classList.remove("hidden");
-            iaTooltip.classList.add("hidden");
             requestAnimationFrame(() => {
                 iaOverlay.classList.remove("opacity-0");
                 iaPanel.classList.remove("translate-y-10", "opacity-0");
@@ -197,23 +257,23 @@
             addMessage(userText, "user");
             chatInput.value = "";
 
-            const text = userText.toLowerCase();
-            let reply = "Puedo ayudarte con maridajes. Prueba escribiendo vino, carne, pasta o postre para una recomendación personalizada.";
+            const reply = userText.toLowerCase().includes("vino")
+                ? "Para una experiencia completa, le sugiero nuestro Cabernet de la casa para acompañar el Ojo de Bife. ¿Desea ver la carta de bodega?"
+                : "Puedo asistirle con maridajes y recomendaciones del menú. Si desea, indíqueme su plato preferido.";
 
-            if (text.includes("vino")) {
-                reply = "Si buscas vino para una experiencia elegante, te recomiendo una copa de Cabernet Franc gran reserva. Va excelente con entradas intensas y platos de cocción lenta.";
-            } else if (text.includes("carne")) {
-                reply = "Excelente elección. Para nuestro Ojo de Bife, te recomiendo un Malbec de reserva que realza los sabores ahumados. ¿Te gustaría que lo añada a tu orden?";
-            } else if (text.includes("pasta")) {
-                reply = "Para pasta cremosa, te sugiero un Chardonnay con paso por barrica; para pasta con salsa roja, un Sangiovese joven resalta perfecto el tomate y las hierbas.";
-            } else if (text.includes("postre")) {
-                reply = "Nuestra especialidad es el Volcán de Chocolate con frutos del bosque; marida perfectamente con un vino tardío.";
+            setTimeout(() => addMessage(reply, "assistant"), 520);
+        });
+
+        checkoutBtn.addEventListener("click", () => {
+            if (!cart.length) {
+                alert("Aún no hay platos en el carrito.");
+                return;
             }
-
-            setTimeout(() => addMessage(reply, "assistant"), 550);
+            const items = cart.map((item) => item.name).join(", ");
+            const message = `Hola! Me gustaría reservar/pedir: ${items}`;
+            const whatsappUrl = `https://wa.me/5490000000000?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, "_blank", "noopener,noreferrer");
         });
     </script>
-    </div>
-
 </body>
 </html>
