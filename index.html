@@ -205,7 +205,7 @@
 
         const currency = new Intl.NumberFormat("es-AR", { style: "currency", currency: "ARS", maximumFractionDigits: 0 });
         const CART_STORAGE_KEY = "elite_menu_cart";
-        const OPENING_HOURS_TEXT = "12:00 a 16:00 y 19:00 a 23:30";
+        const OPENING_HOURS_TEXT = "08:15 a 17:00 y 17:00 a 23:30";
         const cart = [];
         const bellSound = new Audio("https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3");
         bellSound.volume = 0.18;
@@ -281,8 +281,8 @@
         const checkKitchenStatus = () => {
             const now = new Date();
             const minutes = now.getHours() * 60 + now.getMinutes();
-            const lunchOpen = withinRange(minutes, 12 * 60, 16 * 60);
-            const dinnerOpen = withinRange(minutes, 19 * 60, 23 * 60 + 30);
+            const lunchOpen = withinRange(minutes, 8 * 60 + 15, 17 * 60);
+            const dinnerOpen = withinRange(minutes, 17 * 60, 23 * 60 + 30);
             isKitchenOpen = lunchOpen || dinnerOpen;
 
             if (!isKitchenOpen) {
