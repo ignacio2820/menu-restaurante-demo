@@ -4,21 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Digital Premium - Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         .gold-gradient { background: linear-gradient(120deg, #9f6a1b, #f0cf75, #a56c1c); }
         .glass-card { background: linear-gradient(145deg, rgba(38, 38, 38, 0.92), rgba(18, 18, 18, 0.95)); border: 1px solid rgba(255, 255, 255, 0.08); }
         .safe-area { padding-bottom: calc(6.5rem + env(safe-area-inset-bottom)); }
+        .font-display { font-family: "Playfair Display", serif; }
+        .font-body { font-family: "Inter", sans-serif; }
+        .gold-line { border: 1px solid rgba(212, 175, 55, 0.38); box-shadow: inset 0 0 0 1px rgba(255, 234, 170, 0.06); }
     </style>
 </head>
-<body class="bg-neutral-950 text-white font-sans">
-    <div class="mx-auto min-h-screen max-w-md bg-gradient-to-b from-neutral-900 via-neutral-950 to-black shadow-[0_0_80px_rgba(0,0,0,0.55)] safe-area">
+<body class="bg-black text-white font-body">
+    <div class="mx-auto min-h-screen max-w-md bg-gradient-to-b from-black via-neutral-950 to-black shadow-[0_0_100px_rgba(0,0,0,0.85)] safe-area">
     <header class="px-5 pt-7 pb-5 border-b border-white/10">
         <div class="flex items-center justify-between">
             <div>
                 <p class="text-[11px] uppercase tracking-[0.22em] text-yellow-200/75">Restaurante Elite</p>
-                <h1 class="text-2xl font-semibold mt-1">Menú de Autor</h1>
+                <h1 class="text-3xl font-display mt-1 text-yellow-100">Menú de Autor</h1>
             </div>
             <button class="h-11 w-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
                 <i data-lucide="bell-ring" class="h-5 w-5 text-yellow-300"></i>
@@ -28,18 +34,18 @@
     </header>
 
     <main class="px-5 py-5">
-        <section class="glass-card rounded-3xl p-4">
+        <section class="glass-card gold-line rounded-3xl p-4">
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold">Nuestras Especialidades</h2>
+                <h2 class="text-2xl font-display text-yellow-100">Nuestras Especialidades</h2>
                 <span class="text-xs tracking-widest uppercase text-yellow-300">Top Picks</span>
             </div>
-            <div class="rounded-2xl overflow-hidden border border-white/10">
+            <div class="rounded-2xl overflow-hidden gold-line bg-gradient-to-b from-white/[0.03] to-white/[0.01] transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_20px_35px_rgba(0,0,0,0.45)] hover:border-yellow-300/60">
                 <div class="h-40 bg-gradient-to-br from-neutral-700 to-neutral-900 flex items-center justify-center text-gray-300">
                     <i data-lucide="utensils-crossed" class="h-12 w-12"></i>
                 </div>
                 <div class="p-4">
                     <div class="flex justify-between items-start gap-3">
-                        <h3 class="font-semibold text-lg leading-tight">Ojo de Bife Premium</h3>
+                        <h3 class="font-display text-2xl leading-tight text-yellow-100">Ojo de Bife Premium</h3>
                         <span class="gold-gradient text-black text-sm font-bold px-2.5 py-1 rounded-full">$18.500</span>
                     </div>
                     <p class="text-gray-400 text-sm mt-2">400g de corte seleccionado con manteca de hierbas y papas rústicas.</p>
@@ -82,37 +88,55 @@
     </div>
 
     <div id="ia-modal" class="hidden fixed inset-0 z-50">
-        <div id="ia-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-[2px]"></div>
-        <div class="relative z-10 mx-auto mt-24 w-[92%] max-w-sm glass-card rounded-3xl p-5 border border-yellow-200/20">
-            <div class="flex items-start justify-between gap-3">
-                <div>
-                    <p class="text-xs tracking-[0.2em] uppercase text-yellow-300">Asistente IA</p>
-                    <h3 class="mt-1 text-xl font-semibold">Sommelier Elite</h3>
+        <div id="ia-overlay" class="absolute inset-0 bg-black/55 backdrop-blur-sm transition-opacity duration-300 opacity-0"></div>
+        <div id="ia-panel" class="absolute bottom-0 left-0 right-0 mx-auto w-full max-w-md px-3 pb-[calc(1rem+env(safe-area-inset-bottom))] transition-all duration-300 ease-out translate-y-10 opacity-0">
+            <div class="rounded-[28px] gold-line bg-white/10 backdrop-blur-xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] overflow-hidden">
+                <div class="px-4 pt-4 pb-3 border-b border-white/10">
+                    <div class="flex items-center justify-between gap-3">
+                        <div>
+                            <h3 class="text-lg font-display text-yellow-300 tracking-wide">Elite Sommelier</h3>
+                            <div class="mt-1 flex items-center gap-2 text-xs text-emerald-300">
+                                <span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                En línea
+                            </div>
+                        </div>
+                        <button id="close-ia-modal" class="h-9 w-9 rounded-xl border border-white/15 bg-black/20 flex items-center justify-center text-gray-300">
+                            <i data-lucide="x" class="h-4 w-4"></i>
+                        </button>
+                    </div>
                 </div>
-                <button id="close-ia-modal" class="h-9 w-9 rounded-xl border border-white/10 bg-white/5 flex items-center justify-center text-gray-300">
-                    <i data-lucide="x" class="h-4 w-4"></i>
-                </button>
-            </div>
-            <p class="text-sm text-gray-300 mt-4">Cuéntame tus gustos y te recomendaré el mejor maridaje y plato de la casa para hoy.</p>
-            <div id="chat-box" class="mt-4 space-y-2 max-h-52 overflow-y-auto pr-1">
-                <div class="bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-gray-200">
-                    Hola, soy tu IA Sommelier. Pregúntame por maridajes.
+
+                <div id="chat-box" class="h-72 overflow-y-auto px-4 py-4 space-y-3 bg-gradient-to-b from-black/20 to-black/35">
+                    <div class="max-w-[85%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100">
+                        Hola, soy tu sommelier virtual. Escribe tu plato ideal y te recomiendo el mejor vino.
+                    </div>
                 </div>
-            </div>
-            <form id="chat-form" class="mt-3 flex gap-2">
-                <input
-                    id="chat-input"
-                    type="text"
-                    placeholder="Ej: ¿Qué vino va con carne?"
-                    class="flex-1 bg-black/40 border border-white/15 rounded-xl px-3 py-2 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-400/40"
-                />
-                <button type="submit" class="px-3 py-2 rounded-xl gold-gradient text-black font-semibold text-sm">
-                    Enviar
-                </button>
-            </form>
-            <div class="mt-4 flex gap-2">
-                <button id="dismiss-ia-modal" class="flex-1 py-2.5 rounded-xl border border-white/15 bg-white/5 text-sm">Más tarde</button>
-                <button class="flex-1 py-2.5 rounded-xl gold-gradient text-black font-semibold text-sm">Iniciar chat IA</button>
+
+                <form id="chat-form" class="p-3 border-t border-white/10">
+                    <div class="flex items-center gap-2 rounded-2xl border border-white/15 bg-black/35 px-2 py-2">
+                        <input
+                            id="chat-input"
+                            type="text"
+                            placeholder="Pregunta por maridajes..."
+                            class="flex-1 bg-transparent px-2 text-sm text-white placeholder:text-gray-400 focus:outline-none"
+                        />
+                        <button type="submit" class="h-10 w-10 rounded-xl gold-gradient text-black flex items-center justify-center">
+                            <i data-lucide="send-horizontal" class="h-4 w-4"></i>
+                        </button>
+                    </div>
+                </form>
+                <div class="px-3 pb-3">
+                    <a
+                        id="whatsapp-cta"
+                        href="https://wa.me/5490000000000?text=Hola%2C%20quiero%20una%20recomendaci%C3%B3n%20de%20maridaje%20del%20men%C3%BA."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="w-full inline-flex items-center justify-center gap-2 rounded-2xl border border-emerald-400/40 bg-emerald-500/10 text-emerald-300 py-2.5 text-sm font-medium transition-colors hover:bg-emerald-500/20"
+                    >
+                        <i data-lucide="message-circle" class="h-4 w-4"></i>
+                        Pedir recomendación por WhatsApp
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -122,8 +146,8 @@
 
         const iaButton = document.getElementById("ia-button");
         const iaModal = document.getElementById("ia-modal");
+        const iaPanel = document.getElementById("ia-panel");
         const closeIaModal = document.getElementById("close-ia-modal");
-        const dismissIaModal = document.getElementById("dismiss-ia-modal");
         const iaOverlay = document.getElementById("ia-overlay");
         const iaTooltip = document.getElementById("ia-tooltip");
         const chatForm = document.getElementById("chat-form");
@@ -134,8 +158,8 @@
             const message = document.createElement("div");
             message.className =
                 role === "user"
-                    ? "bg-yellow-300 text-black rounded-xl px-3 py-2 text-sm ml-8"
-                    : "bg-white/5 border border-white/10 rounded-xl px-3 py-2 text-sm text-gray-200 mr-8";
+                    ? "max-w-[85%] ml-auto bg-yellow-300 text-black rounded-2xl rounded-br-md px-3 py-2 text-sm"
+                    : "max-w-[85%] bg-white/5 border border-white/10 rounded-2xl rounded-bl-md px-3 py-2 text-sm text-gray-100";
             message.textContent = text;
             chatBox.appendChild(message);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -144,15 +168,21 @@
         const openModal = () => {
             iaModal.classList.remove("hidden");
             iaTooltip.classList.add("hidden");
+            requestAnimationFrame(() => {
+                iaOverlay.classList.remove("opacity-0");
+                iaPanel.classList.remove("translate-y-10", "opacity-0");
+            });
+            chatInput.focus();
         };
 
         const closeModal = () => {
-            iaModal.classList.add("hidden");
+            iaOverlay.classList.add("opacity-0");
+            iaPanel.classList.add("translate-y-10", "opacity-0");
+            setTimeout(() => iaModal.classList.add("hidden"), 280);
         };
 
         iaButton.addEventListener("click", openModal);
         closeIaModal.addEventListener("click", closeModal);
-        dismissIaModal.addEventListener("click", closeModal);
         iaOverlay.addEventListener("click", closeModal);
 
         document.addEventListener("keydown", (event) => {
@@ -167,10 +197,18 @@
             addMessage(userText, "user");
             chatInput.value = "";
 
-            const asksForMeat = /\b(carne|bife|res|vacuno|asado|cordero)\b/i.test(userText);
-            const reply = asksForMeat
-                ? "Para carne te recomiendo un Malbec Reserva: cuerpo medio-alto, taninos suaves y notas frutales que combinan perfecto con cortes premium."
-                : "Puedo ayudarte con maridajes. Si quieres, dime el plato principal y te doy una recomendación precisa.";
+            const text = userText.toLowerCase();
+            let reply = "Puedo ayudarte con maridajes. Prueba escribiendo vino, carne, pasta o postre para una recomendación personalizada.";
+
+            if (text.includes("vino")) {
+                reply = "Si buscas vino para una experiencia elegante, te recomiendo una copa de Cabernet Franc gran reserva. Va excelente con entradas intensas y platos de cocción lenta.";
+            } else if (text.includes("carne")) {
+                reply = "Excelente elección. Para nuestro Ojo de Bife, te recomiendo un Malbec de reserva que realza los sabores ahumados. ¿Te gustaría que lo añada a tu orden?";
+            } else if (text.includes("pasta")) {
+                reply = "Para pasta cremosa, te sugiero un Chardonnay con paso por barrica; para pasta con salsa roja, un Sangiovese joven resalta perfecto el tomate y las hierbas.";
+            } else if (text.includes("postre")) {
+                reply = "Nuestra especialidad es el Volcán de Chocolate con frutos del bosque; marida perfectamente con un vino tardío.";
+            }
 
             setTimeout(() => addMessage(reply, "assistant"), 550);
         });
